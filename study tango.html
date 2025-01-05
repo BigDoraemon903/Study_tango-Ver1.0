@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<style id="webmakerstyle">
+
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <style id="webmakerstyle">
+      *{
+        margin:0px;
+      }
+      .html{
+        margin:0;
+        padding:0;
+      }
+      .quest {
+        border: solid #fcba03 10px;
+        border-radius: 5px;
+        background-color: #9ede9e;
+        text-align: center;
+        font-size: 45px;
+        font-family: 'Comic Sans MS';
+        padding: 0px 0px 0px 0px;
+        margin: 0px 40px 0px 40px;
+      }
+      body {
+        font-family: 'Mochiy Pop One';
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        font-family: 'Mochiy Pop One';
+        width: 300px;
+        height: auto;
+        margin-top: 30px;
+        background-color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .button {
+        display: flex;
+        justify-content: center;
+        margin: 10px 50px 0px 50px;
+      }
+      .onebutton {
+        border-style: solid white;
+        width: 570px;
+        height: 50px;
+        box-sizing: border-box;
+        margin: 0 10px;
+        padding: 10px;
+        text-align: center;
+        font-size: 16px;
+      }
+      .center {
+        text-align: center;
+        font-size: 20px;
+  background-color: transparent;
+      }
+      #kekkatitle {
+        display: block;
+        font-size: 50px;
+        margin-top: 0px;
+        padding-top: 0px;
+      }
+      .background {
+  display: block;
+  width: 100%;
+  min-height: 100vh;  /* 画面の高さに合わせる */
+  text-decoration: none;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)
+  ), url('https://i.ibb.co/Fs6yTLJ/Screenshot-2025-01-04-21-33-17.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;  /* スクロールしても背景が動かないように */
+}.start-button {
+        margin-top: 200px;
+        font-size: 30px;
+        cursor: pointer;
+      }
+      h1{
+      font-weight:normal;
+      font-size:50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+      <!-- スタート画面 -->
+      <div class="center" id="start-screen">
+        <h1 id="title">Study Tango</h1>
+        <button class="start-button" id="start-button">Start Quiz</button>
+      </div>
+
+      <!-- クイズ画面 -->
+      <div class="quest" id="question-container" style="display:none;">
+        <p id="question"></p>
+      </div>
+
+      <div class="center">
+        <p id="kekkatitle"></p>
+        <p id="kekka"></p>
+      <big>  <p  id="sharelink"></p> </big>
+        <p id="kekkalist"></p>
+      </div>
+
+      <div class="button">
+        <div class="onebutton"><button id="ans1" style="display:none;"></button></div>
+        <div class="onebutton"><button id="ans2" style="display:none;"></button></div>
+      </div>
+      <div class="button">
+        <div class="onebutton"><button id="ans3" style="display:none;"></button></div>
+        <div class="onebutton"><button id="ans4" style="display:none;"></button></div>
+      </div>
+
+      <div class="center">
+        <br><p id="untext"></p>
+      </div>
+    </div>
+
+    <script>
+    
+     const English = [
+        "according to A",
+        "as for A",
+        "in front of A",
+        "name A after B",
+        "feel like Ving",
+        "amount of A",
+        "a kind of A",
+        "one by one",
+        "depend on A",
+        "die out",
+        "make a difference",
+        "be different from A",
+        "encourage O to V",
+        "even if S V",
+        "hand out A",
+        "feel free to V",
+        "little by little",
+        "I have no idea.",
+        "instead of A",
+        "more and more",
+        "in case of A",
+        "agree with A",
+        "pass by",
+        "run out of A",
+        "be satisfied with A",
+        "after a while",
+        "a variety of A",
+        "be worth Ving",
+        "not only A but also B",
+        "run away",
+        "according to A",
+        "be about to V",
+        "get over A",
+        "get out of A",
+        "①most of the As/②most As",
+        "How about you?",
+        "sound like    A",
+        "be looking for A",
+        "be good at A(Ving)",
+        "turn on A",
+        "Just a moment.",
+        "Why  don’t  we(you)～?",
+        "What’s wrong?/What’s up?",
+        "Take a rest.",
+        "That’s too bad.",
+        "be looking forward to A(Ving)",
+        "Of course.",
+        "in need",
+        "Shall we  ～?",
+        "after all",
+        "call back later",
+        "for oneself",
+        "with a smile",
+        "such as A",
+        "kind of A",
+        "At that [the] time",
+        "be held",
+        "not  ～  at all",
+        "all the best",
+        "check A out/(check out A)",
+        "in danger of  ～",
+        "and so on",
+        "for the first time",
+        "for sale",
+        "for example",
+        "on the internet",
+        "in the future",
+        "remind A of B",
+        "get along with A",
+        "both A and B",
+        "My pleasure.",
+        "Guess what!",
+        "You’re welcome.",
+        "Just a moment.",
+        "thanks to A",
+        "touch one’s heart",
+        "someone else",
+        "grow into A",
+        "help O V(to V)",
+        "next to A",
+        "this way",
+        "be ready for A",
+        "put a tax on A",
+        "let O V(原形)",
+        "命令文, or  ～",
+        "命令文, and  ～",
+        "make an effort make efforts",
+        "from A to B",
+        "turn into A",
+        "pass on A",
+        "keep Ving",
+        "with +  可算名詞",
+        "in +  不可算名詞",
+        "What’s the matter?",
+
+        "almost",
+        "overseas",
+        "scary",
+        "spread",
+        "culture",
+        "through",
+        "amazing",
+        "behind",
+        "pleasure",
+        "without",
+        "anywhere",
+        "relax",
+        "traditional",
+        "leading",
+        "later",
+        "country",
+        "difficult",
+        "main",
+        "share",
+        "attract",
+        "whole",
+        "various",
+        "popular",
+        "crowded",
+        "nervous",
+        "round",
+        "national",
+        "exciting",
+        "society",
+        "remove",
+        "neighbor",
+        "research",
+        "luggage",
+        "childhood",
+        "case",
+        "carefully",
+        "elderly",
+        "facility",
+        "universal",
+        "exhibition",
+        "first-hand",
+        "helpful",
+        "common",
+        "stair",
+        "follow",
+        "alone",
+        "measure",
+        "effort",
+        "recognize",
+        "disaster",
+        "tough",
+        "fossil",
+        "experience",
+        "overseas",
+        "creative",
+        "handle",
+        "difference",
+        "though",
+        "successful",
+        "graduation",
+        "trust",
+        "announce",
+        "relatively",
+        "dangerous",
+        "seem",
+        "negative",
+        "imagine",
+        "encourage",
+        "receive",
+        "exchange",
+        "import",
+        "survival",
+        "latest",
+        "fortunately",
+        "prepare",
+        "pursue",
+        "extend",
+        "weak",
+        "device",
+        "surprisingly",
+        "effective",
+        "decision",
+        "illegal",
+        "ban",
+        "beginning",
+        "up until",
+        "relate",
+        "destroy",
+        "rapidly",
+        "capture",
+        "population",
+        "climate",
+        "danger",
+        "strict",
+        "either",
+        "solve",
+        "affect",
+        "effort",
+        "condition",
+        "extinction",
+        "endangered",
+        "quietly",
+        "store",
+        "disaster",
+        "circle",
+        "terrible",
+        "scared",
+        "by the way",
+        "in the middle of A",
+        "hopeful",
+        "horizon",
+        "seasonal",
+        "survive",
+        "breed",
+        "shade",
+        "injure",
+        "real",
+        "shelter",
+        "evacuation",
+        "simulation",
+        "resident",
+        "movement",
+        "colony",
+        "debate",
+        "natural gas",
+        "fossil fuel",
+        "renewable",
+        "abroad",
+        "connect",
+        "everywhere",
+        "heavy",
+        "alone",
+        "hurt",
+        "bored",
+        "article",
+        "face",
+        "career",
+        "advice",
+        "translation",
+        "for now",
+
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+
+        "parent (parents)",
+        "father",
+        "mother",
+        "son",
+        "daughter",
+        "child(children)",
+        "brother",
+        "sister",
+        "grandfather",
+        "fish",
+        "sheep",
+
+        "according to A",
+        "each other",
+        "How about  ～  ?",
+        "a little",
+        "Nice to meet you.",
+        "I see.",
+        "help  人  with  モノ",
+        "have a party",
+        "No, thank you.",
+        "No problem.",
+        "listen to A",
+        "for the first time.",
+        "at first",
+        "because of A",
+        "in the future",
+        "all over the world",
+        "be afraid of A",
+        "be interested in A",
+        "been to A (been abroad)/(been there)",
+        "Can I  ～?/Shall I  ～?",
+        "in those days",
+        "write A back",
+        "drop out",
+        "every year",
+        "fold A up",
+        "go back to A",
+        "go on A",
+
+        "thousands of As",
+        "all the time",
+        "on foot",
+        "get tired",
+
+        "holiday",
+        "found",
+        "weight",
+        "head",
+        "trouble",
+        "guest",
+        "recipe",
+        "even",
+        "heard",
+        "for sale",
+        "wrap",
+        "Say cheese!",
+        "favor",
+        "work out",
+        "bridge",
+        "sentence",
+        "deep",
+        "feeling",
+        "writer",
+        "phone",
+        "Bye for now.",
+        "How’s everything.",
+        "take a look",
+        "message",
+        "tour",
+        "tourist",
+        "shadow",
+        "however",
+        "ground",
+        "member",
+        "safe",
+        "go out",
+        "case",
+        "plate",
+        "couple",
+        "mean",
+        "quiet",
+        "shy",
+        "thirsty",
+        "local",
+        "borrow",
+        "useful",
+        "forget",
+        "realize",
+        "alive",
+        "culture",
+        "decide",
+        "natural",
+        "precious",
+        "unique",
+        "beauty",
+        "attractive",
+        "influence",
+        "worldwide",
+        "row",
+        "clearly",
+        "content",
+        "reservation",
+        "weigh",
+        "scary",
+        "communicate",
+        "different",
+        "trouble",
+        "thick",
+        "directly",
+        "appear",
+        "progress",
+        "disappear",
+        "continue",
+        "translate",
+        "knowledge",
+        "strength",
+        "various",
+        "necessary",
+        "through",
+        "relationship",
+        "improve",
+        "skill",
+        "somehow",
+        "get fired",
+        "friendly",
+        "independent",
+        "besides",
+        "domestic",
+        "cheap",
+        "so far",
+        "behavior",
+        "discover",
+        "convenient",
+        "relation",
+        "beyond",
+        "lead",
+        "vote",
+        "respect",
+        "tough",
+        "independence",
+        "protest",
+        "human rights",
+        "discrimination",
+        "unfair",
+        "sidewalk",
+        "freely",
+        "accept",
+        "instruction",
+        "emergency",
+        "protect",
+        "actually",
+        "include",
+        "opinion",
+        "curious",
+        "increase",
+        "below",
+        "apply to A",
+        "uncomfortable",
+        "ordinary",
+        "possible",
+        "functional",
+        "establish",
+        "courage",
+        "survey",
+        "ask A a favor",
+        "in the future",
+        "develop",
+        "specific",
+        "reason",
+        "introduce",
+        "ancient",
+        "follow",
+        "mustn’t",
+        "elderly",
+        "quite",
+        "populous",
+        "border",
+        "supply/(supplies)",
+        "donate",
+        "definitely",
+        "material",
+        "traffic light",
+        "guess",
+        "original",
+        "employee",
+        "tightly",
+        "as a result",
+        "change trains",
+        "beginner",
+        "burden",
+        "shadow",
+        "wisdom",
+        "technology",
+        "handrail",
+        "disabled",
+        "barrier",
+        "action",
+        "gestures",
+        "facial/expression",
+        "wake",
+        "invite",
+        "on foot",
+        "easily",
+        "important",
+        "historic",
+        "overseas",
+        "human",
+        "rule",
+        "perfect",
+        "right away",
+        "hear of  ～",
+        "originally",
+        "certainly",
+        "directly",
+        "take A away",
+        "life",
+        "culture",
+        "skill",
+
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+
+        "Friday",
+        "Saturday",
+        "Sunday",
+
+        "grandmother",
+        "uncle",
+        "aunt",
+        "nephew",
+        "niece",
+        "cousin",
+        "husband",
+        "wife"
+      ];
+     const Japanese = [
+        "A によると",
+"A に関して言えば",
+"A の前で",
+"B にちなんでAと名付ける",
+"～したい気がする",
+"A( 不可算名詞) の合計",
+"A の一種",
+"１人ずつ/１つずつ",
+"A に頼る",
+"絶滅する",
+"違いを生む",
+"A とは異なる",
+"O にV するようにうながす",
+"たとえ～でも",
+"A を手渡す",
+"自由にV する",
+"少しずつ",
+"思いつかない/わからない",
+"A の代わりに",
+"ますます多くの",
+"A  の場合に(備えて)",
+"A に賛成である⇔  disagree with",
+"通り過ぎる",
+"A を使い果たす",
+"A に満足する",
+"しばらくして",
+"様々なA",
+"V する価値がある",
+"A だけではなくB も",
+"逃げる",
+"A によると",
+"まさにVしようとしている",
+"乗り越える/回復する",
+"A から降りる",
+"多くのA(特定)/多くのA(不特定)",
+"あなたはどうですか｡",
+"A のように思える",
+"A を探す",
+"A が得意",
+"A を付ける",
+"ちょっと待って。",
+"～しませんか。",
+"どうかしたの。",
+"ひと休みしなさい。",
+"それはいけませんね。",
+"A を楽しみに待つ",
+"もちろん。",
+"困っている",
+"～しましょう。",
+"結局は・とうとう",
+"折り返し電話する",
+"独力で・自力で",
+"笑みを浮かべて",
+"A のような",
+"A の種類",
+"その当時/あの時",
+"(パーティーなどが)開かれる",
+"全く～でない/少しも～でない",
+"万事うまくいきますように。",
+"A を調べる",
+"～の危機にある",
+"～など",
+"初めて",
+"売り物",
+"例えば",
+"インターネットで",
+"将来",
+"A にB を思い出させる",
+"A と仲良くする",
+"A もB も",
+"どういたしまして。",
+"あのね、何だと思う。",
+"どういたしまして。",
+"ちょっと待って。",
+"A のおかげで",
+"～の心に触れる/～を感動させる",
+"他のだれか",
+"成長してA になる",
+"O がV するのに役立つ",
+"A の隣に",
+"このように",
+"A の用意ができている",
+"A に税金をかける",
+"O にV させる/O にV してもらう",
+"さもないと～",
+"そうすれば～",
+"努力する",
+"A からB まで",
+"A になる・変わる",
+"A を伝える",
+"～し続ける",
+"～を使って",
+"～を使って",
+"どうかしたの。",
+
+"もう少しで",
+"海外で",
+"おそろしい/こわい",
+"広がる",
+"文化",
+"…を通りぬけて",
+"驚かせるような/見事な",
+"…の後ろに",
+"楽しみ/喜び",
+"…なしで[に]",
+"[否定文で]/どこにも(…ない)",
+"くつろぐ",
+"伝統的な",
+"主要な",
+"もっと遅く/あとで",
+"国",
+"難しい・困難な",
+"主な・主要な",
+"…を共有する",
+"引きつける/魅了する",
+"全部の/全体の",
+"いろいろな",
+"人気のある/一般的な",
+"こみ合った/満員の",
+"緊張して",
+"丸い/球形の",
+"国の/国家の",
+"興奮させるような/わくわくさせるような",
+"社会",
+"…を取り除く",
+"近所の人/隣人",
+"…を研究する/調査する",
+"手荷物",
+"子どものころ",
+"場合",
+"注意深く",
+"年配の",
+"施設/設備",
+"全ての人々の",
+"展示",
+"直接に/じかに",
+"助けになる/役に立つ",
+"ふつうの/よくある・共通の",
+"階段",
+"…に従う/…を守る",
+"ひとりで/ただ…だけ",
+"…をはかる",
+"努力",
+"…とわかる/…を認識する",
+"災害",
+"困難な/難しい",
+"化石",
+"…を経験する",
+"外国[海外]への/海外の",
+"創造力のある",
+"…を処理する",
+"ちがい",
+"…だけれども",
+"成功した",
+"卒業",
+"…を信頼する/…だと期待する",
+"…を発表する",
+"比較的",
+"危険な",
+"…のように見える/思われる",
+"否定的な/よくない",
+"…を想像する",
+"…を勇気づける/励ます",
+"…を受け取る",
+"交流/やりとり",
+"…を輸入する",
+"存続/生き残ること",
+"最近の/最新の",
+"幸運にも",
+"用意する/備える",
+"…を追い求める",
+"…を広げる",
+"弱い/かすかな",
+"装置",
+"驚いたことには",
+"効果的な",
+"決定/結論",
+"違法な",
+"…を禁止する",
+"最初の部分",
+"…まで",
+"…を(～に)関係させる",
+"…を破壊する",
+"速く/急速に",
+"…を捕まえる",
+"人口/(動物の)個体数",
+"気候",
+"危険(性)",
+"厳しい",
+"(否定文の文末で)…もまた(～ない)",
+"…を解決する",
+"…に影響を与える",
+"努力",
+"状況",
+"絶滅",
+"絶滅の危機にさらされている",
+"静かに/落ち着いて",
+"…を蓄える",
+"災害",
+"…を丸で囲む",
+"ひどい",
+"(…を)こわがって",
+"ところで",
+"A の真ん中に",
+"希望を持っている",
+"地平線/水平線",
+"季節の",
+"生き残る",
+"…を飼育する/繁殖する",
+"影/日陰",
+"…を傷つける",
+"本当の/本物の",
+"避難所",
+"避難",
+"シミュレーション",
+"住民/居住者",
+"(政治的・社会的な)/運動",
+"植民地",
+"討論/ディベート",
+"天然ガス",
+"化石燃料",
+"再生可能な",
+"外国に(へ・で)",
+"～を結びつける",
+"どこでも/いたるところで",
+"重い",
+"ひとりで/ただ～だけ",
+"～を傷つける",
+"退屈した",
+"記事",
+"～に直面する",
+"職業",
+"忠告/助言",
+"翻訳",
+"今のところは",
+
+
+"1 月",
+"2 月",
+"3 月",
+"4 月",
+"5 月",
+"6 月",
+
+"月曜日",
+"火曜日",
+"水曜日",
+"木曜日",
+
+"親(両親)",
+"父親",
+"母親",
+"息子",
+"娘",
+"子ども",
+"兄弟",
+"姉妹",
+"祖父",
+
+
+"魚",
+"羊",
+
+"A によると",
+"お互いに",
+"～しませんか。",
+"少し",
+"はじめまして。",
+"なるほど。",
+"[人]の[モノ]を手伝う",
+"パーティーを開く",
+"いいえ、けっこうです。",
+"いいですよ。",
+"A を聞く",
+"初めて",
+"初めに/初めは",
+"A が原因で",
+"将来",
+"世界中で",
+"A を恐れる/A を心配する",
+"A に興味がある",
+"A に行ったことがある",
+"~しましょうか。",
+"あの頃/その当時",
+"～に返事を書く",
+"中退する/諦める",
+"毎年",
+"A を折りたたむ",
+"A に戻る/A に帰国する",
+"～をする/～を始める",
+
+"何千ものA",
+"いつも/ずっと",
+"歩いて/徒歩で",
+"疲れる",
+
+
+
+
+"休日/休暇",
+"find の過去形・過去分詞",
+"～の重さがある",
+"頭",
+"困難/面倒",
+"客",
+"調理法",
+"～でさえ",
+"hear の過去形・過去分詞",
+"売り物の",
+"～を巻く",
+"はい、チーズ！",
+"親切な行為",
+"体を鍛える",
+"橋",
+"文",
+"深い",
+"感情",
+"作家",
+"電話",
+"さようなら。",
+"調子はどうですか。",
+"ちらりと見る/見てみる",
+"伝言，メッセージ",
+"旅行",
+"観光客",
+"影",
+"しかしながら",
+"地面",
+"一員・メンバー",
+"安全な",
+"外出する",
+"場合",
+"（浅い）取り皿",
+"夫婦",
+"…を意味する/…のことを言う",
+"静かな",
+"内気な/恥ずかしがりの",
+"のどのかわいた",
+"(ある)地方の/地元の",
+"…を借りる",
+"役に立つ/有用な",
+"(…を)忘れる",
+"…だと気づく/実現する",
+"生きて/生きた状態で",
+"文化の",
+"…を決める",
+"自然の",
+"貴重な/大切な",
+"特有の/独特な",
+"美しさ/美",
+"魅力的な",
+"…に影響を及ぼす",
+"世界中に/世界的に",
+"(座席の)列",
+"はっきりと",
+"中身/内容",
+"予約",
+"…の重さがある",
+"恐ろしい/こわい",
+"連絡する/伝える",
+"ちがう・異なる/様々な",
+"困難・面倒・迷惑",
+"濃い・厚い/どろっとした",
+"直接に",
+"現れる/姿を現す",
+"進歩/発達",
+"姿を消す/消滅する",
+"…を続ける",
+"…を訳す/翻訳する",
+"知識/理解",
+"強さ/長所",
+"いろいろな",
+"必要な",
+"…のために/…によって",
+"関係/結びつき",
+"…を改善する/上達させる",
+"腕前/技術",
+"何らかの形で",
+"解雇される",
+"好意的な/親切な",
+"相互に依存している",
+"そのうえ/さらに",
+"国内の",
+"(品物・料金が)安い",
+"今まで(は)/これまで(は)",
+"ふるまい",
+"…を発見する",
+"便利な",
+"関係",
+"…をこえたところに[へ]",
+"…を導く/…を先導する",
+"投票する",
+"…を尊敬する/尊重する",
+"困難な/難しい",
+"独立",
+"抗議する",
+"人権",
+"差別",
+"不公平な/不当な",
+"歩道",
+"自由に",
+"…を受け入れる",
+"指示",
+"緊急事態",
+"…を守る/保護する",
+"実は/本当は",
+"…を含む/含める",
+"意見/考え",
+"好奇心の強い",
+"…を増やす/増大させる",
+"下に/下記に[の]",
+"A に当てはまる",
+"心地よくない",
+"ふつうの",
+"(物事が)可能な/できる",
+"実用的な",
+"…を設立する",
+"勇気",
+"調査",
+"A にお願いする",
+"未来に/将来に",
+"～を発達させる",
+"特定の/具体的な",
+"理由",
+"～を紹介する",
+"古代の",
+"～に従う/～を守る",
+"must not  の短縮形",
+"年配の",
+"かなり/相当",
+"人口の多い",
+"国境",
+"必需品",
+"…を寄付する",
+"もちろん/確かに",
+"掲示物・材料/教科書・資料",
+"交通信号",
+"(…を)推測する",
+"独創的な/独自の",
+"従業員",
+"しっかりと",
+"結果として",
+"電車を乗り換える",
+"初心者",
+"負担/重荷",
+"影",
+"知恵・英和",
+"(科学)技術/テクノロジー",
+"手すり",
+"体の不自由な",
+"壁・障壁",
+"アクション/行動",
+"身ぶり",
+"表情",
+"目が覚める",
+"…を招待する/招く",
+"徒歩で",
+"簡単に・楽に/すぐに",
+"重要な/大切な",
+"歴史上重要な",
+"外国［海外］への/海外の",
+"人・人間",
+"規則/ルール",
+"完全な・完璧な/最適な",
+"すぐに",
+"～について聞く",
+"もとは/はじめは",
+"［返事で］承知しました",
+"直接に",
+"～を奪う",
+"生命・命",
+"文化",
+"腕前/技術",
+
+
+
+"7 月",
+"8 月",
+"9 月",
+"10 月",
+"11 月",
+"12 月",
+
+"金曜日",
+"土曜日",
+"日曜日",
+
+
+"祖母",
+"叔父（おじ）",
+"叔母（おば）",
+"甥（おい）",
+"姪（めい）",
+"いとこ（従兄弟、従姉妹）",
+"夫",
+"妻"];
+var num = Math.floor(Math.random() * (English.length + 1));
+      var result;
+      var nowquestion = 0;
+      var maru = 0;
+      var text = 3;
+      var ut = document.getElementById('untext');
+      var kekkalist = [];
+      var quizFinished = false;
+
+      function Quest(inputNumber) {
+        const uniqueRandomNumbers = new Set();
+        while (uniqueRandomNumbers.size < 3) {
+          const randomNum = Math.floor(Math.random() * (English.length + 1));
+          if (randomNum !== inputNumber) {
+            uniqueRandomNumbers.add(randomNum);
+          }
+        }
+        const randomNumbersArray = Array.from(uniqueRandomNumbers);
+        const resultArray = [inputNumber, ...randomNumbersArray];
+        for (let i = resultArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [resultArray[i], resultArray[j]] = [resultArray[j], resultArray[i]];
+        }
+        return resultArray;
+      }
+
+      function displayQuestion() {
+        if (quizFinished) return;
+        num = Math.floor(Math.random() * (English.length + 1));
+        result = Quest(num);
+
+        var que = document.getElementById("question");
+        que.innerHTML = English[num];
+
+        var a1 = document.getElementById('ans1');
+        a1.innerHTML = Japanese[result[0]];
+        a1.style.display = 'inline-block'; // ボタンを表示
+
+        var a2 = document.getElementById('ans2');
+        a2.innerHTML = Japanese[result[1]];
+        a2.style.display = 'inline-block'; // ボタンを表示
+
+        var a3 = document.getElementById('ans3');
+        a3.innerHTML = Japanese[result[2]];
+        a3.style.display = 'inline-block'; // ボタンを表示
+
+        var a4 = document.getElementById('ans4');
+        a4.innerHTML = Japanese[result[3]];
+        a4.style.display = 'inline-block'; // ボタンを表示
+      }
+
+      function hantei(rightans, userans) {
+        if (quizFinished) return;
+
+        var questionElement = document.getElementById("question");
+        if (!questionElement) {
+          console.error("Element with ID 'question' not found.");
+          return;
+        }
+
+        var rightnum = result.indexOf(rightans);
+        if (rightnum === -1) {
+          console.error("Right answer not found in result array.");
+          return;
+        }
+
+        if (rightnum === userans) {
+          maru += 1;
+          nowquestion += 1;
+          text = "◯" + English[result[rightnum]] + "･･･" + Japanese[result[rightnum]];
+          ut.innerHTML = text;
+          kekkalist.push(text + '<br>');
+        } else {
+          nowquestion += 1;
+          text = "✕" + English[result[rightnum]] + "･･･" + Japanese[result[rightnum]];
+          ut.innerHTML = text;
+          kekkalist.push(text + '<br>');
+        }
+
+        if (nowquestion >= 10) {
+          quizFinished = true;
+          var elementsToHide = [
+            questionElement,
+            document.getElementById("ans1"),
+            document.getElementById("ans2"),
+            document.getElementById("ans3"),
+            document.getElementById("ans4"),
+            document.getElementById("untext")
+          ];
+
+          elementsToHide.forEach(function (el) {
+            if (el) {
+              el.style.display = "none";
+            }
+          });
+
+          var kekkahappyou = document.getElementById('kekka');
+          var seikaisu = "正解数: " + maru + "問/10問 正解率:" + maru * 10 + "%";
+          kekkahappyou.innerHTML = kekkalist.join('') + seikaisu;
+          var time = getTime();
+          listadd(time + " 正解数:" + maru + "問");
+          var kekkatitle = document.getElementById('kekkatitle');
+          kekkatitle.innerHTML = "結果発表";
+          var link=document.getElementById('sharelink');
+          link.innerHTML ="<br>";
+          // 新しい iframe 要素を作成
+var iframe = document.createElement('iframe');
+
+// iframe の属性を設定
+iframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSdmculg4Vvzyll1CMr5ssQ-4L1lYxraGc1z3eClu9djC-5Qug/viewform?embedded=true";
+iframe.width = "640";
+iframe.height = "720";
+iframe.frameborder = "0";
+iframe.marginheight = "0";
+iframe.marginwidth = "0";
+
+// iframe を sharelink の後に追加
+sharelink.appendChild(iframe);
+          var kl = document.getElementById("kekkalist");
+          if (kl) {
+            var kiroku = JSON.parse(localStorage.getItem('kiroku')) || [];
+            kl.innerHTML = "過去の記録" + "<br>" + kiroku.join("<br>");
+          }
+        } else {
+          displayQuestion();
+        }
+      }
+
+      function startQuiz() {
+        // 初期画面を非表示
+        document.getElementById('start-screen').style.display = 'none';
+        
+        // クイズ画面を表示
+        document.getElementById('question-container').style.display = 'block';
+        displayQuestion();
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById("start-button").onclick = function () {
+          startQuiz();
+        };
+
+        document.getElementById("ans1").onclick = function () {
+          hantei(num, 0);
+        };
+        document.getElementById("ans2").onclick = function () {
+          hantei(num, 1);
+        };
+        document.getElementById("ans3").onclick = function () {
+          hantei(num, 2);
+        };
+        document.getElementById("ans4").onclick = function () {
+          hantei(num, 3);
+        };
+      });
+
+      function savedata(key, value) {
+        localStorage.setItem(key, value);
+      }
+
+      function getdata(key) {
+        var value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : null;
+      }
+
+      function listadd(p) {
+        let kiroku = JSON.parse(localStorage.getItem('kiroku')) || [];
+        kiroku.unshift(p);
+        localStorage.setItem('kiroku', JSON.stringify(kiroku));
+      }
+
+      function getTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${year}/${month}/${day} ${hours}:${minutes}`;
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+</body>
+</html>
