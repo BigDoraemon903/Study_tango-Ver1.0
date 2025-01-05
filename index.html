@@ -4,12 +4,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <style id="webmakerstyle">
-      *{
-        margin:0px;
+      * {
+        margin: 0px;
       }
-      .html{
-        margin:0;
-        padding:0;
+      .html {
+        margin: 0;
+        padding: 0;
       }
       .quest {
         border: solid #fcba03 10px;
@@ -50,10 +50,11 @@
         text-align: center;
         font-size: 30px;
       }
+ 
       .center {
         text-align: center;
         font-size: 35px;
-  background-color: transparent;
+        background-color: transparent;
       }
       #kekkatitle {
         display: block;
@@ -62,27 +63,42 @@
         padding-top: 0px;
       }
       .background {
-  display: block;
-  width: 100%;
-  min-height: 100vh;  /* 画面の高さに合わせる */
-  text-decoration: none;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0.6)
-  ), url('https://i.ibb.co/Fs6yTLJ/Screenshot-2025-01-04-21-33-17.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;  /* スクロールしても背景が動かないように */
-}.start-button {
+        display: block;
+        width: 100%;
+        min-height: 100vh;
+        /* 画面の高さに合わせる */
+        text-decoration: none;
+        background: linear-gradient(
+            rgba(255, 255, 255, 0.6),
+            rgba(255, 255, 255, 0.6)
+          ),
+          url('https://i.ibb.co/Fs6yTLJ/Screenshot-2025-01-04-21-33-17.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        /* スクロールしても背景が動かないように */
+      }
+      .start-button {
         margin-top: 200px;
         font-size: 50px;
-        width:400px;
+        width: 400px;
         cursor: pointer;
       }
-      h1{
-      font-weight:normal;
-      font-size:100px;
+      h1 {
+        font-weight: normal;
+        font-size: 100px;
+      }
+
+      /* 追加された再挑戦ボタンのスタイル */
+      .retry-button {
+        font-size: 40px;
+        width: 500px;
+        background-color: #f0ad4e;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        margin-top: 20px;
       }
     </style>
   </head>
@@ -102,7 +118,11 @@
       <div class="center">
         <p id="kekkatitle"></p>
         <p id="kekka"></p>
-      <big>  <p  id="sharelink"></p> </big>
+        <div id="retry-container" class="center" style="display: none;">
+        <button class="retry-button" id="retry-button">↺リトライ</button>
+      </div>
+
+        <big> <p id="sharelink"></p> </big>
         <p id="kekkalist"></p>
       </div>
 
@@ -118,11 +138,13 @@
       <div class="center">
         <br><p id="untext"></p>
       </div>
+
+      <!-- 追加された再挑戦ボタン -->
+      
     </div>
 
     <script>
-    
-     const English = [
+           const English = [
         "according to A",
         "as for A",
         "in front of A",
@@ -1108,7 +1130,8 @@
 "いとこ（従兄弟、従姉妹）",
 "夫",
 "妻"];
-var num = Math.floor(Math.random() * (English.length + 1));
+      
+      var num = Math.floor(Math.random() * (English.length + 1));
       var result;
       var nowquestion = 0;
       var maru = 0;
@@ -1211,27 +1234,32 @@ var num = Math.floor(Math.random() * (English.length + 1));
           listadd(time + " 正解数:" + maru + "問");
           var kekkatitle = document.getElementById('kekkatitle');
           kekkatitle.innerHTML = "結果発表";
-          var link=document.getElementById('sharelink');
-          link.innerHTML ="<br>";
+          var link = document.getElementById('sharelink');
+          link.innerHTML = "<br>";
+
           // 新しい iframe 要素を作成
-var iframe = document.createElement('iframe');
+          var iframe = document.createElement('iframe');
 
-// iframe の属性を設定
-iframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSdmculg4Vvzyll1CMr5ssQ-4L1lYxraGc1z3eClu9djC-5Qug/viewform?embedded=true";
-iframe.width = "640";
-iframe.height = "720";
-iframe.frameborder = "0";
-iframe.marginheight = "0";
-iframe.marginwidth = "0";
-iframe.style.border = "none";         
+          // iframe の属性を設定
+          iframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSdmculg4Vvzyll1CMr5ssQ-4L1lYxraGc1z3eClu9djC-5Qug/viewform?embedded=true";
+          iframe.width = "640";
+          iframe.height = "720";
+          iframe.frameborder = "0";
+          iframe.marginheight = "0";
+          iframe.marginwidth = "0";
+          iframe.style.border = "none";         
 
-// iframe を sharelink の後に追加
-sharelink.appendChild(iframe);
+          // iframe を sharelink の後に追加
+          sharelink.appendChild(iframe);
+
           var kl = document.getElementById("kekkalist");
           if (kl) {
             var kiroku = JSON.parse(localStorage.getItem('kiroku')) || [];
             kl.innerHTML = "過去の記録" + "<br>" + kiroku.join("<br>");
           }
+
+          // 再挑戦ボタンを表示
+          document.getElementById('retry-container').style.display = 'block';
         } else {
           displayQuestion();
         }
@@ -1240,7 +1268,7 @@ sharelink.appendChild(iframe);
       function startQuiz() {
         // 初期画面を非表示
         document.getElementById('start-screen').style.display = 'none';
-        
+
         // クイズ画面を表示
         document.getElementById('question-container').style.display = 'block';
         displayQuestion();
@@ -1262,6 +1290,11 @@ sharelink.appendChild(iframe);
         };
         document.getElementById("ans4").onclick = function () {
           hantei(num, 3);
+        };
+
+        // 再挑戦ボタンのクリックイベント
+        document.getElementById("retry-button").onclick = function () {
+          location.reload();  // ページをリロードして最初の画面に戻る
         };
       });
 
@@ -1291,4 +1324,4 @@ sharelink.appendChild(iframe);
       }
     </script>
   </body>
-  </html>
+</html>
